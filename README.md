@@ -2,7 +2,7 @@
 Android Material Navigation (ActionBar, Navigation Drawer, Tabs, CardView, ViewPager)
 
 
-# Fundamental Components of Material Navigation:
+# Components of Material Navigation:
 - Support for Android API 8+
 - ActionBar
 - Navigation Drawer (with indicator animation)
