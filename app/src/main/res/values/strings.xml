@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Material Navigation</string>
+    <string name="action_settings">Settings</string>
+    <string name="subtitle">Subtitle</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="drawer_opened">Navigation drawer opened</string>
+    <string name="menu_title">Menu Title</string>
+    <string name="page">Page</string>
+    <string name="tab">Tab</string>
+    <string-array name="menulist">
+        <item>Dynamic Tab 1</item>
+        <item>Dynamic Tab 2</item>
+        <item>Dynamic Tab 3</item>
+        <item>Dynamic Tab 4</item>
+        <item>Dynamic Tab 5</item>
+        <item>Dynamic Tab 6</item>
+        <item>Dynamic Tab 7</item>
+    </string-array>
+</resources>
