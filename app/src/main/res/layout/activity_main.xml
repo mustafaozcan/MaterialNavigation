@@ -35,6 +35,7 @@
             android:layout_height="45dp"
             android:background="@color/primary_light"
             android:gravity="center"
+            android:drawableLeft="@mipmap/ic_launcher"
             android:text="@string/menu_title"/>
 
         <ListView
