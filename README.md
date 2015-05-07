@@ -1,5 +1,5 @@
 # Material Navigation
-Android Material Navigation (ActionBar, Navigation Drawer, Tabs, CardView, ViewPager)
+Android Material Navigation (ToolBar, Navigation Drawer, Tabs, CardView, ViewPager)
 
 
 # Components of Material Navigation:
