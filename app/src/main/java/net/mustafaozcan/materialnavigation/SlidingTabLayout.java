@@ -67,7 +67,8 @@ public class SlidingTabLayout extends HorizontalScrollView {
     private int mTabViewLayoutId;
     private int mTabViewTextViewId;
     private boolean mDistributeEvenly;
-    private int textColor = Color.BLACK;
+    private int textColor = Color.WHITE;
+    private int textColorSelected = Color.GRAY;
     private ViewPager mViewPager;
     private SparseArray<String> mContentDescriptions = new SparseArray<>();
     private ViewPager.OnPageChangeListener mViewPagerPageChangeListener;
@@ -98,7 +99,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
     /**
      * Set the custom {@link TabColorizer} to be used.
      * <p/>
-     * If you only require simple custmisation then you can use
+     * If you only require simple customisation then you can use
      * {@link #setSelectedIndicatorColors(int...)} to achieve
      * similar effects.
      */
@@ -208,6 +209,8 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
             if (tabTitleView == null && TextView.class.isInstance(tabView)) {
                 tabTitleView = (TextView) tabView;
+                tabTitleView.setText(adapter.getPageTitle(i));
+                tabView.setOnClickListener(tabClickListener);
             }
 
             if (mDistributeEvenly) {
@@ -216,8 +219,6 @@ public class SlidingTabLayout extends HorizontalScrollView {
                 lp.weight = 1;
             }
 
-            tabTitleView.setText(adapter.getPageTitle(i));
-            tabView.setOnClickListener(tabClickListener);
             String desc = mContentDescriptions.get(i, null);
             if (desc != null) {
                 tabView.setContentDescription(desc);
@@ -275,6 +276,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
             mTabStrip.onViewPagerPageChanged(position, positionOffset);
 
             View selectedTitle = mTabStrip.getChildAt(position);
+
             int extraOffset = (selectedTitle != null)
                     ? (int) (positionOffset * selectedTitle.getWidth())
                     : 0;
@@ -301,9 +303,9 @@ public class SlidingTabLayout extends HorizontalScrollView {
                 mTabStrip.onViewPagerPageChanged(position, 0f);
                 scrollToTab(position, 0);
             }
-            for (int i = 0; i < mTabStrip.getChildCount(); i++) {
-                mTabStrip.getChildAt(i).setSelected(position == i);
-            }
+
+            setTabSelected(position);
+
             if (mViewPagerPageChangeListener != null) {
                 mViewPagerPageChangeListener.onPageSelected(position);
             }
@@ -316,6 +318,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
         public void onClick(View v) {
             for (int i = 0; i < mTabStrip.getChildCount(); i++) {
                 if (v == mTabStrip.getChildAt(i)) {
+
                     mViewPager.setCurrentItem(i);
                     return;
                 }
@@ -323,8 +326,19 @@ public class SlidingTabLayout extends HorizontalScrollView {
         }
     }
 
+    public void setTabSelected(int position) {
+        for (int i = 0; i < mTabStrip.getChildCount(); i++) {
+            TextView textView = (TextView) mTabStrip.getChildAt(i);
+            textView.setTextColor(position == i ? textColorSelected : textColor);
+            textView.setSelected(position == i);
+        }
+    }
+
     public void setTextColor(int color) {
         this.textColor = color;
     }
 
+    public void setTextColorSelected(int color) {
+        this.textColorSelected = color;
+    }
 }

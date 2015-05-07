@@ -11,6 +11,16 @@
         android:orientation="vertical"
         tools:context=".MainActivity">
 
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            style="@style/Widget.MyApp.ActionBar"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/primary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/Base.ThemeOverlay.AppCompat.Dark"/>
+
         <net.mustafaozcan.materialnavigation.SlidingTabLayout
             android:id="@+id/sliding_tabs"
             android:layout_width="match_parent"
@@ -32,11 +42,16 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="170dp"
             android:background="@color/primary_light"
-            android:gravity="center"
             android:drawableLeft="@mipmap/ic_launcher"
-            android:text="@string/menu_title"/>
+            android:drawablePadding="10dp"
+            android:drawableStart="@mipmap/ic_launcher"
+            android:gravity="center_vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="@string/menu_title"
+            android:textColor="@color/primary_text"/>
 
         <ListView
             android:id="@+id/navDrawerList"
@@ -45,7 +60,9 @@
             android:layout_weight="1"
             android:background="#fff"
             android:choiceMode="singleChoice"
-            android:divider="@color/devider"
-            android:dividerHeight="1dp"/>
+            android:divider="@color/divider"
+            android:dividerHeight="1dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"/>
     </LinearLayout>
 </android.support.v4.widget.DrawerLayout>

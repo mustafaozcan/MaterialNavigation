@@ -18,13 +18,15 @@ package net.mustafaozcan.materialnavigation;
  */
 
 import android.content.res.Configuration;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,11 +34,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
-    private String mActivityTitle;
     private LinearLayout mDrawerPanel;
 
     @Override
@@ -51,19 +53,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUpNavigationDrawer() {
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+
         try {
-            ActionBar actionBar = getSupportActionBar();
-            actionBar.setDisplayShowTitleEnabled(true);
+            assert actionBar != null;
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
             actionBar.setSubtitle(getString(R.string.subtitle));
+            actionBar.setDisplayShowTitleEnabled(true);
         } catch (Exception ignored) {
         }
 
         ListView mDrawerListView = (ListView) findViewById(R.id.navDrawerList);
         mDrawerPanel = (LinearLayout) findViewById(R.id.navDrawerPanel);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mActivityTitle = getTitle().toString();
+        //String mActivityTitle = getTitle().toString();
 
         ArrayAdapter<String> mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.menulist));
         mDrawerListView.setAdapter(mAdapter);
@@ -79,19 +86,13 @@ public class MainActivity extends AppCompatActivity {
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                try {
-                    getSupportActionBar().setTitle(getString(R.string.drawer_opened));
-                } catch (Exception ignored) {
-                }
+                //getSupportActionBar().setTitle(getString(R.string.drawer_opened));
                 invalidateOptionsMenu();
             }
 
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
-                try {
-                    getSupportActionBar().setTitle(mActivityTitle);
-                } catch (Exception ignored) {
-                }
+                //getSupportActionBar().setTitle(mActivityTitle);
                 invalidateOptionsMenu();
             }
         };
@@ -107,19 +108,29 @@ public class MainActivity extends AppCompatActivity {
         vpPager.setAdapter(adapterViewPager);
 
         SlidingTabLayout slidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
-        slidingTabLayout.setTextColor(Color.WHITE);
+        slidingTabLayout.setTextColor(getResources().getColor(R.color.tab_text_color));
+        slidingTabLayout.setTextColorSelected(getResources().getColor(R.color.tab_text_color_selected));
         slidingTabLayout.setDistributeEvenly();
         slidingTabLayout.setViewPager(vpPager);
+        slidingTabLayout.setTabSelected(0);
 
         // Change indicator color
-        /*
         slidingTabLayout.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
             @Override
             public int getIndicatorColor(int position) {
-                return Color.RED;
+                return getResources().getColor(R.color.tab_indicator);
             }
-        });*/
+        });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mDrawerLayout.isDrawerOpen(mDrawerPanel)) {
+            mDrawerLayout.closeDrawer(mDrawerPanel);
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override
@@ -138,7 +149,29 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+
+        if (searchItem != null) {
+            SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+
+            // use this method for search process
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    // use this method when query submitted
+                    Toast.makeText(MainActivity.this, query, Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    // use this method for auto complete search process
+                    return false;
+                }
+            });
+
+        }
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -147,7 +180,6 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         // Activate the navigation drawer toggle
         return mDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }

@@ -4,10 +4,10 @@
     <string name="subtitle">Subtitle</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
-    <string name="drawer_opened">Navigation drawer opened</string>
     <string name="menu_title">Menu Title</string>
     <string name="page">Page</string>
     <string name="tab">Tab</string>
+    <string name="search">Search</string>
     <string-array name="menulist">
         <item>Dynamic Tab 1</item>
         <item>Dynamic Tab 2</item>

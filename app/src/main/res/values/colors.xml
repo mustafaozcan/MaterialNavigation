@@ -3,8 +3,11 @@
     <color name="primary">#2196F3</color>
     <color name="primary_dark">#2196F3</color>
     <color name="primary_light">#90CAF9</color>
-    <color name="accent">#1E88E5</color>
+    <color name="accent">#2196F3</color>
     <color name="primary_text">#fff</color>
     <color name="secondary_text">#fff</color>
-    <color name="devider">#1fffffff</color>
+    <color name="divider">#1fffffff</color>
+    <color name="tab_text_color">#BBDEFB</color>
+    <color name="tab_text_color_selected">#fff</color>
+    <color name="tab_indicator">#90CAF9</color>
 </resources>

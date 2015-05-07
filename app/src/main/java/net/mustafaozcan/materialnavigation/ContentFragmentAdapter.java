@@ -23,7 +23,7 @@ import android.support.v4.app.FragmentPagerAdapter;
  */
 class ContentFragmentAdapter extends FragmentPagerAdapter {
     private static int NUM_ITEMS = 1;
-    private Context c;
+    private final Context c;
 
     public ContentFragmentAdapter(FragmentManager fragmentManager, Context context, int item_count) {
         super(fragmentManager);
