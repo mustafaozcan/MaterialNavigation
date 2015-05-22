@@ -1,17 +1,28 @@
 # Material Navigation
-Android Material Navigation (ActionBar, Navigation Drawer, Tabs, CardView, ViewPager)
+Android Material Navigation (ToolBar, Navigation Drawer, Tabs, CardView, ViewPager)
 
 
 # Components of Material Navigation:
 - Support for Android API 8+
-- ActionBar
+- ToolBar
 - Navigation Drawer (with indicator animation)
 - Dynamic Drawer menu items with header (array from strings.xml)
 - Dynamic Tabs (customized SlidingTabs of Google/iosched)
+- SearchView
 - CardView
 - ViewPager
 - Fragmentation (for ViewPager)
 - AppCompat Activity
+
+# Changelog:
+## 07 May 2015 (commit b5b3d89b03)
+- ActionBar replaced with ToolBar
+- Added back key to close drawer
+- Added search button
+- Added SearchView
+- Fixed Navigation Drawer placed under ActionBar
+- Added selected and unselected Tab color options
+- Disabled title change on drawer open
 
 
 # Improvements:
