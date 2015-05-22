@@ -176,11 +176,16 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
+
+        if (item != null && item.getItemId() == android.R.id.home) {
+            if (mDrawerLayout.isDrawerOpen(mDrawerPanel)) {
+                mDrawerLayout.closeDrawer(mDrawerPanel);
+            } else {
+                mDrawerLayout.openDrawer(mDrawerPanel);
+            }
             return true;
         }
-        // Activate the navigation drawer toggle
-        return mDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
+
+        return item.getItemId() == R.id.action_settings || super.onOptionsItemSelected(item);
     }
 }
