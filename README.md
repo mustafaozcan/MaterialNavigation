@@ -15,6 +15,9 @@ Android Material Navigation (ToolBar, Navigation Drawer, Tabs, CardView, ViewPag
 - AppCompat Activity
 
 # Changelog:
+## 22 May 2015 (commit 50d51b92d6)
+- Added right side drawer support
+
 ## 07 May 2015 (commit b5b3d89b03)
 - ActionBar replaced with ToolBar
 - Added back key to close drawer
@@ -51,6 +54,14 @@ Android Material Navigation (ToolBar, Navigation Drawer, Tabs, CardView, ViewPag
 
 
 # Customizations:
+Change drawer side (default position start):
+
+Change navDrawerPanel's "layout_gravity" to "end" in activity_main.xml:
+
+``` xml
+	android:layout_gravity="end"
+```
+
 Change indicator color:
 
 in setTabs method of Main Activity
@@ -63,6 +74,8 @@ slidingTabLayout.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
 	}
 });
 ```
+
+
 
 
 #Developed By
