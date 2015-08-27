@@ -20,7 +20,6 @@ Android Material Navigation (ToolBar, Navigation Drawer, Navigation View, Tabs, 
 - Updated all components for SDK Level 23
 - Removed dynamic drawer menu 
 
-# Changelog:
 ## 22 May 2015 (commit 50d51b92d6)
 - Added right side drawer support
 
