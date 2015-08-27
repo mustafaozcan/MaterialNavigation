@@ -19,6 +19,7 @@ package net.mustafaozcan.materialnavigation;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -30,16 +31,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
-    private LinearLayout mDrawerPanel;
+    private NavigationView mNavigationView;
+    private int mCurrentSelectedPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Initial tab count
         setTabs(4);
+        mNavigationView.setCheckedItem(R.id.navigation_item_4);
+
     }
 
     private void setUpNavigationDrawer() {
@@ -67,19 +67,30 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception ignored) {
         }
 
-        ListView mDrawerListView = (ListView) findViewById(R.id.navDrawerList);
-        mDrawerPanel = (LinearLayout) findViewById(R.id.navDrawerPanel);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        //String mActivityTitle = getTitle().toString();
-
-        ArrayAdapter<String> mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.menulist));
-        mDrawerListView.setAdapter(mAdapter);
-
-        mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
+        mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                setTabs(position + 1);
-                mDrawerLayout.closeDrawer(mDrawerPanel);
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                menuItem.setChecked(true);
+                switch (menuItem.getItemId()) {
+                    case R.id.navigation_item_1:
+                        mCurrentSelectedPosition = 0;
+                        break;
+                    case R.id.navigation_item_2:
+                        mCurrentSelectedPosition = 1;
+                        break;
+                    case R.id.navigation_item_3:
+                        mCurrentSelectedPosition = 2;
+                        break;
+                    case R.id.navigation_item_4:
+                        mCurrentSelectedPosition = 3;
+                        break;
+                }
+
+                setTabs(mCurrentSelectedPosition + 1);
+                mDrawerLayout.closeDrawer(mNavigationView);
+                return true;
             }
         });
 
@@ -102,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void setTabs(int count) {
+    public void setTabs(int count) {
         ViewPager vpPager = (ViewPager) findViewById(R.id.vpPager);
         ContentFragmentAdapter adapterViewPager = new ContentFragmentAdapter(getSupportFragmentManager(), this, count);
         vpPager.setAdapter(adapterViewPager);
@@ -126,8 +137,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (mDrawerLayout.isDrawerOpen(mDrawerPanel)) {
-            mDrawerLayout.closeDrawer(mDrawerPanel);
+        if (mDrawerLayout.isDrawerOpen(mNavigationView)) {
+            mDrawerLayout.closeDrawer(mNavigationView);
         } else {
             super.onBackPressed();
         }
@@ -178,10 +189,10 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         if (item != null && item.getItemId() == android.R.id.home) {
-            if (mDrawerLayout.isDrawerOpen(mDrawerPanel)) {
-                mDrawerLayout.closeDrawer(mDrawerPanel);
+            if (mDrawerLayout.isDrawerOpen(mNavigationView)) {
+                mDrawerLayout.closeDrawer(mNavigationView);
             } else {
-                mDrawerLayout.openDrawer(mDrawerPanel);
+                mDrawerLayout.openDrawer(mNavigationView);
             }
             return true;
         }

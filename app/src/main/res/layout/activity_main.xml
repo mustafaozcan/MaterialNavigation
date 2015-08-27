@@ -1,6 +1,7 @@
 <android.support.v4.widget.DrawerLayout
     android:id="@+id/drawer_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -33,36 +34,12 @@
             android:layout_height="wrap_content"/>
     </LinearLayout>
     <!-- The navigation drawer -->
-    <LinearLayout
-        android:id="@+id/navDrawerPanel"
-        android:layout_width="240dp"
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="170dp"
-            android:background="@color/primary_light"
-            android:drawableLeft="@mipmap/ic_launcher"
-            android:drawablePadding="10dp"
-            android:drawableStart="@mipmap/ic_launcher"
-            android:gravity="center_vertical"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:text="@string/menu_title"
-            android:textColor="@color/primary_text"/>
-
-        <ListView
-            android:id="@+id/navDrawerList"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="#fff"
-            android:choiceMode="singleChoice"
-            android:divider="@color/divider"
-            android:dividerHeight="1dp"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"/>
-    </LinearLayout>
+        app:itemIconTint="@android:color/black"
+        app:headerLayout="@layout/drawer_header"
+        app:menu="@menu/menu_drawer"/>
 </android.support.v4.widget.DrawerLayout>

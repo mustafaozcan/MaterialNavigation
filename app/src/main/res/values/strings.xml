@@ -17,4 +17,8 @@
         <item>Dynamic Tab 6</item>
         <item>Dynamic Tab 7</item>
     </string-array>
+    <string name="menu1">Tab Count 1</string>
+    <string name="menu2">Tab Count 2</string>
+    <string name="menu3">Tab Count 3</string>
+    <string name="menu4">Tab Count 4</string>
 </resources>
